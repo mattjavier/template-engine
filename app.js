@@ -52,9 +52,33 @@ const internQ = [
   }
 ]
 
+let managerCount = 0
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+
+const query = () => {
+  inquirer.prompt({
+    type: 'list',
+    name: 'employeeType',
+    message: 'Choose an employee to enter:',
+    choices: ['Manager', 'Engineer', 'Intern']
+  })
+  .then(res => {
+    // check if answer is 'Manager'
+    if (res.employeeType === 'Manager') {
+      if (managerCount === 0) {
+        managerCount++
+        // build employee
+      } else {
+        query()
+      }
+    } else {
+      // build employee
+    }
+  })
+  .catch(err => console.log(err))
+}
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -75,3 +99,5 @@ const internQ = [
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+query()
