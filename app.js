@@ -28,29 +28,24 @@ const employeeQ = [
   }
 ]
 
-const managerQ = [
-  {
-    type: 'number',
-    name: 'officeNumber',
-    message: 'Enter an office number:'
-  }
-]
+const managerQ = {
+  type: 'number',
+  name: 'officeNumber',
+  message: 'Enter an office number:'
+}
 
-const engineerQ = [
-  {
-    type: 'input',
-    name: 'github',
-    message: 'Enter a GitHub username:'
-  }
-]
 
-const internQ = [
-  {
-    type: 'input',
-    name: 'school',
-    message: 'Enter a school:'
-  }
-]
+const engineerQ = {
+  type: 'input',
+  name: 'github',
+  message: 'Enter a GitHub username:'
+}
+
+const internQ = {
+  type: 'input',
+  name: 'school',
+  message: 'Enter a school:'
+}
 
 let managerCount = 0
 let employees = []
@@ -58,26 +53,45 @@ let employees = []
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
+const moreEmployees = () => {
+  inquirer.prompt({
+    type: 'confirm',
+    name: 'more',
+    message: 'Do you want to add more employees?'
+  })
+  .then(({ more }) => {
+    if (more) {
+      query()
+    } else {
+      render(employees)
+    }
+  })
+  .catch(err => console.log(err))
+}
+
 const buildManager = () => {
-  inquirer.prompt([...employeeQ, ...managerQ])
+  inquirer.prompt([...employeeQ, managerQ])
   .then(({ name, id, email, officeNumber }) => {
     employees.push(new Manager(name, id, email, officeNumber))
+    moreEmployees()
   })
   .catch(err => console.log(err))
 }
 
 const buildEngineer = () => {
-  inquirer.prompt([...employeeQ, ...engineerQ])
+  inquirer.prompt([...employeeQ, engineerQ])
   .then(({ name, id, email, github }) => {
     employees.push(new Engineer(name, id, email, github))
+    moreEmployees()
   })
   .catch(err => console.log(err))
 }
 
 const buildIntern = () => {
-  inquirer.prompt([...employeeQ, ...internQ])
+  inquirer.prompt([...employeeQ, internQ])
   .then(({ name, id, email, school }) => {
     employees.push(new Intern(name, id, email, school))
+    moreEmployees()
   })
   .catch(err => console.log(err))
 }
