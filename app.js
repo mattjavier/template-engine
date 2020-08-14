@@ -63,7 +63,9 @@ const moreEmployees = () => {
     if (more) {
       query()
     } else {
-      render(employees)
+      fs.writeFile(outputPath, render(employees), (err) => {
+        if (err) { console.log(err) }
+      })
     }
   })
   .catch(err => console.log(err))
