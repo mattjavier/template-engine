@@ -15,13 +15,21 @@ The output of the program will be an HTML file called `team.html` in the `output
 ## Images
 
 * The initial start of the program with the initial question.
+  
+<img src="./assets/1.png" width="700">
 
 * Example output of the finished program.
+  
+<img src="./assets/2.png" width="700">
 
 * Example output template generated. 
+  
+<img src="./assets/3.png" width="700">
 
 * Passed all tests
 
+<img src="./assets/4.png" width="700">
+
 ## Demo Video
 
-A demo video is available in the `assets/` directory. It can also be viewed [here]()
+A demo video is available in the `assets/` directory. It can also be viewed [here](https://drive.google.com/file/d/1zIPtXqEa9CxYI26jLwv5IfI9YN42R8x-/view)
