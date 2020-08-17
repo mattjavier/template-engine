@@ -20,6 +20,8 @@ The output of the program will be an HTML file called `team.html` in the `output
 
 * Example output template generated. 
 
+* Passed all tests
+
 ## Demo Video
 
 A demo video is available in the `assets/` directory. It can also be viewed [here]()
