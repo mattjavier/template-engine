@@ -29,27 +29,6 @@ const employeeQ = [
   }
 ]
 
-// extra manager question
-const managerQ = {
-  type: 'number',
-  name: 'officeNumber',
-  message: 'Enter an office number:'
-}
-
-// extra engineer question
-const engineerQ = {
-  type: 'input',
-  name: 'github',
-  message: 'Enter a GitHub username:'
-}
-
-// extra intern question
-const internQ = {
-  type: 'input',
-  name: 'school',
-  message: 'Enter a school:'
-}
-
 // initial manager count, increment if user inputs a manager
 let managerCount = 0
 
@@ -65,11 +44,9 @@ const moreEmployees = () => {
   })
   .then(({ more }) => {
     if (more) {
-
       // prompt user for more employees if they decided Y
       query()
     } else {
-
       // render all employees to 'team.html' 
       fs.writeFile(outputPath, render(employees), (err) => {
         if (err) { console.log(err) }
@@ -81,13 +58,14 @@ const moreEmployees = () => {
 
 // prompt user for manager information
 const buildManager = () => {
-  inquirer.prompt([...employeeQ, managerQ])
+  inquirer.prompt([...employeeQ, {
+    type: 'number',
+    name: 'officeNumber',
+    message: 'Enter an office number:'
+  }])
   .then(({ name, id, email, officeNumber }) => {
-
-    // push employee to array
+    // push employee to array, then check if user wants to add more employees
     employees.push(new Manager(name, id, email, officeNumber))
-    
-    // check if user wants to add more employees
     moreEmployees()
   })
   .catch(err => console.log(err))
@@ -95,13 +73,14 @@ const buildManager = () => {
 
 // prompt user for engineer information
 const buildEngineer = () => {
-  inquirer.prompt([...employeeQ, engineerQ])
+  inquirer.prompt([...employeeQ, {
+    type: 'input',
+    name: 'github',
+    message: 'Enter a GitHub username:'
+  }])
   .then(({ name, id, email, github }) => {
-
-    // push employee to array
+    // push employee to array, then check if user wants to add more employees
     employees.push(new Engineer(name, id, email, github))
-
-    // check if user wants to add more employees
     moreEmployees()
   })
   .catch(err => console.log(err))
@@ -109,13 +88,14 @@ const buildEngineer = () => {
 
 // prompt user for intern information
 const buildIntern = () => {
-  inquirer.prompt([...employeeQ, internQ])
+  inquirer.prompt([...employeeQ, {
+    type: 'input',
+    name: 'school',
+    message: 'Enter a school:'
+  }])
   .then(({ name, id, email, school }) => {
-
-    // push employee to array
+    // push employee to array, then check if user wants to add more employees
     employees.push(new Intern(name, id, email, school))
-
-    // check if user wants to add more employees
     moreEmployees()
   })
   .catch(err => console.log(err))
@@ -130,7 +110,6 @@ const query = () => {
     choices: ['Manager', 'Engineer', 'Intern']
   })
   .then(({ employeeType }) => {
-
     // check if it is a manager, engineer or intern
     switch (employeeType) {
       case 'Manager':
